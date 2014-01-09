@@ -1,12 +1,12 @@
 /**
- * jquery.pic_roll
+ * jquery.picroll
  * 
- * @link https://github.com/mingfunwong/jquery.pic_roll
+ * @link https://github.com/mingfunwong/jquery.picroll
  * @license http://opensource.org/licenses/MIT
  * @author Mingfun Wong <mingfun.wong.chn@gmail.com>
  */
 (function($){
-    $.pic_roll = function(options) {
+    $.picroll = function(options) {
         var defaults = {
             i: 5,
             box: ".box.pic_roll",

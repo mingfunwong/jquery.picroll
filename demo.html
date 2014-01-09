@@ -6,10 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>demo</title>
         <script src="jquery-1.9.1.min.js" type="text/javascript"></script>
-        <script src="jquery.pic_roll.js" type="text/javascript"></script>
+        <script src="jquery.picroll.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id="box1" class="pic_roll">
+        <div id="box1" class="picroll">
             <div>
                 <span class="last">Last</span>
                 <span class="next">Next</span>
@@ -43,22 +43,22 @@
         padding: 0;
     }
     
-    .pic_roll {
+    .picroll {
         overflow: hidden;
         position: relative;
         /* tips */
         width: 500px;
         height: 250px;
     }
-    .pic_roll .content {
+    .picroll .content {
         position: absolute;
         /* tips */
         background: #bbb;
     }
-    .pic_roll .content ul {
+    .picroll .content ul {
         width: 100000px;
     }
-    .pic_roll .content ul li {
+    .picroll .content ul li {
         display: inline-block;
         float: left;
         overflow: hidden;
@@ -71,7 +71,7 @@
 
 <script>
 $(function($) {
-    $.pic_roll({
+    $.picroll({
         i: 5, // Show number
         box: '#box1',
         content: '.content',
