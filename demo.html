@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>demo</title>
+        <script src="jquery-1.9.1.min.js" type="text/javascript"></script>
+        <script src="jquery.pic_roll.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="box1" class="pic_roll">
+            <div>
+                <span class="last">Last</span>
+                <span class="next">Next</span>
+            </div>
+            <div class="content">
+                <ul>
+                    <li>Pic 1</li>
+                    <li>Pic 2</li>
+                    <li>Pic 3</li>
+                    <li>Pic 4</li>
+                    <li>Pic 5</li>
+                    <li>Pic 6</li>
+                    <li>Pic 7</li>
+                    <li>Pic 8</li>
+                    <li>Pic 9</li>
+                    <li>Pic 10</li>
+                    <li>Pic 11</li>
+                    <li>Pic 12</li>
+                    <li>Pic 13</li>
+                    <li>Pic 14</li>
+                    <li>Pic 15</li>
+                    <li>Pic 16</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .pic_roll {
+        overflow: hidden;
+        position: relative;
+        /* tips */
+        width: 500px;
+        height: 250px;
+    }
+    .pic_roll .content {
+        position: absolute;
+        /* tips */
+        background: #bbb;
+    }
+    .pic_roll .content ul {
+        width: 100000px;
+    }
+    .pic_roll .content ul li {
+        display: inline-block;
+        float: left;
+        overflow: hidden;
+        /* tips */
+        width: 100px;
+        height: 150px;
+        background: #eee;
+    }
+</style>
+
+<script>
+$(function($) {
+    $.pic_roll({
+        i: 5, // Show number
+        box: '#box1',
+        content: '.content',
+        ul: 'ul',
+        li: 'li',
+        last: '.last',
+        next: '.next'
+    });
+});
+</script>
+
+</html>

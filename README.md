@@ -1,0 +1,1 @@
+基于 jQuery 的左右滚动插件，兼容 IE 7、IE8、Chrome、Firefox。
