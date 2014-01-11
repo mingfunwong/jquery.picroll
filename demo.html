@@ -9,7 +9,7 @@
         <script src="jquery.picroll.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id="box1" class="picroll">
+        <div class="picroll">
             <div>
                 <a href="javascript:;" class="last">Last</a>
                 <a href="javascript:;" class="next">Next</a>
@@ -73,7 +73,7 @@
 $(function($) {
     $.picroll({
         i: 5, // Show number
-        box: '#box1',
+        box: '.picroll',
         content: '.content',
         ul: 'ul',
         li: 'li',

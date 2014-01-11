@@ -8,7 +8,7 @@
 $.picroll = function(options) {
     var defaults = {
         i: 5,
-        box: ".box.pic_roll",
+        box: ".pic_roll",
         content: ".content",
         ul: "ul",
         li: "li",
