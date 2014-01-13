@@ -32,14 +32,14 @@ $.picroll = function(options) {
         function(){
             now_page --;
             (now_page < 0) ? now_page = max_page : "";
-            $content.animate({left: "-" + now_page * li_width * i}, "slow");
+            $content.stop().animate({left: "-" + now_page * li_width * i}, "slow");
        }
     )
     $next.on("click",
         function(){
             now_page ++;
             (now_page > max_page) ? now_page = 0 : "";
-            $content.animate({left: "-" + now_page * li_width * i}, "slow");
+            $content.stop().animate({left: "-" + now_page * li_width * i}, "slow");
        }
     )
   
