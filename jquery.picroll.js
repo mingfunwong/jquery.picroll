@@ -34,7 +34,7 @@ $.fn.picroll = function(options) {
             max = Math.ceil($li.length / options.i) - 1,
             animate = function () { $content.stop().animate({left: now * width * options.i * -1}, options.speed) };
         $box.on("click", options.last, function() {
-                animate(--now < 0 ? now = max : "")
+                animate(-- now < 0 ? now = max : "")
             })
             .on("click", options.next, function(){
                 animate(++ now > max ? now = 0 : "")
