@@ -99,6 +99,8 @@
 $(function($) {
     $('.picroll').picroll({
         i: 5, // Show number
+        before: function (i){console.log(i)},
+        after: function (i){console.log(i)},
     });
 });
 </script>
