@@ -3,7 +3,6 @@
  * 
  * $(".picroll").picroll({
  *     i: 5,                // 每页显示数量
- *     content: ".content", // ul 的父元素
  *     ul: "ul",            // ul 元素
  *     li: "li",            // li 元素
  *     last: ".last",       // 上一页按钮
@@ -20,7 +19,6 @@
 $.fn.picroll = function(options) {
     var options = $.extend({
             i: 5,
-            content: ".content",
             ul: "ul",
             li: "li",
             last: ".last",
@@ -31,12 +29,12 @@ $.fn.picroll = function(options) {
         }, options);
     this.each(function (i) {
         var $box = $(this),
-            $content = $box.find(options.content),
-            $li = $content.find(options.ul).find(options.li),
+            $ul = $box.find(options.ul),
+            $li = $ul.find(options.li),
             width = $li.width(),
             now = 0,
             max = Math.ceil($li.length / options.i) - 1,
-            animate = function () {options.before(now); width = $li.width(); $content.stop().animate({left: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); };
+            animate = function () {options.before(now); width = $li.width(); $ul.stop().animate({left: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); };
         $box.on("click", options.last, function() {
                 animate(-- now < 0 ? now = max : "")
             })
