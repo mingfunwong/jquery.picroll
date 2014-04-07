@@ -1,48 +1,1 @@
-/**
- * jquery.picroll
- * 
- * $(".picroll").picroll({
- *     i: 5,                // √ø“≥œ‘ æ ˝¡ø
- *     ul: "ul",            // ul ‘™Àÿ
- *     li: "li",            // li ‘™Àÿ
- *     last: ".last",       // …œ“ª“≥∞¥≈•
- *     next: ".next",       // œ¬“ª“≥∞¥≈•
- *     speed: "slow"        // πˆ∂ØÀŸ∂»
- *     before: $.noop,      // πˆ∂Ø«∞÷¥––
- *     after: $.noop        // πˆ∂Ø∫Û÷¥––
- * });
- * 
- * @link https://github.com/mingfunwong/jquery.picroll
- * @license http://opensource.org/licenses/MIT
- * @author Mingfun Wong <mingfun.wong.chn@gmail.com>
- */
-$.fn.picroll = function(options) {
-    var options = $.extend({
-            i: 5,
-            ul: "ul",
-            li: "li",
-            last: ".last",
-            next: ".next",
-            speed: "slow",
-            before: $.noop,
-            after: $.noop
-        }, options);
-    this.each(function (i) {
-        var $box = $(this),
-            $ul = $box.find(options.ul),
-            $li = $ul.find(options.li),
-            width = $li.width(),
-            now = 0,
-            max = Math.ceil($li.length / options.i) - 1,
-            animate = function () {options.before(now); width = $li.width(); $ul.stop().animate({left: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); };
-        $box.on("click", options.last, function() {
-                animate(-- now < 0 ? now = max : "")
-            })
-            .on("click", options.next, function(){
-                animate(++ now > max ? now = 0 : "")
-            })
-            .on("select", function(event, i){
-                animate(now = i)
-        });
-    });
-}
+/** * jquery.picroll *  * $(".picroll").picroll({ *     ul: "ul",            // ul ÂÖÉÁ¥† *     li: "li",            // li ÂÖÉÁ¥† *     last: ".last",       // ‰∏ä‰∏ÄÈ°µÊåâÈíÆ *     next: ".next",       // ‰∏ã‰∏ÄÈ°µÊåâÈíÆ *     speed: "normal",     // ÊªöÂä®ÈÄüÂ∫¶ *     ready: $.noop,       // ËΩΩÂÖ•ÂêéÊâßË°å *     before: $.noop,      // ÊªöÂä®ÂâçÊâßË°å *     after: $.noop        // ÊªöÂä®ÂêéÊâßË°å * }); *  * @link https://github.com/mingfunwong/jquery.picroll * @license http://opensource.org/licenses/MIT * @author Mingfun Wong <mingfun.wong.chn@gmail.com> */$.fn.picroll = function(options) {    var options = $.extend({            ul: "ul",            li: "li",            last: ".last",            next: ".next",            speed: "normal",            ready: $.noop,            before: $.noop,            after: $.noop        }, options);    this.each(function (i) {        var $box = $(this),            $ul = $box.find(options.ul),            $li = $ul.find(options.li),            width, number, max,            now = 0,            animate = function () {                options.before($box, {now: now, width: width, max: max});                reset();                $ul.stop().animate({left: now * width * number * -1}, options.speed, function(){ options.after($box, {now: now, width: width, max: max}) });            },            reset = function () {                width = $li.width();                number = parseInt($box.width() / width) < 1 ? 1 : parseInt($box.width() / width);                max = Math.ceil($li.length / number) - 1;            };        reset();        options.ready($box, {now: now, width: width, max: max});        $box.on("click", options.last, function() {                animate(-- now < 0 ? now = max : "")            })            .on("click", options.next, function(){                animate(++ now > max ? now = 0 : "")            })            .on("select", function(event, i){                animate(now = i)        });    });}
