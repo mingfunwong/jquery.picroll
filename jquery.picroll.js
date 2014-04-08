@@ -24,6 +24,7 @@ $.fn.picroll = function(options) {
             last: ".last",
             next: ".next",
             speed: "slow",
+            mode: "width",
             before: $.noop,
             after: $.noop
         }, options);
@@ -31,10 +32,18 @@ $.fn.picroll = function(options) {
         var $box = $(this),
             $ul = $box.find(options.ul),
             $li = $ul.find(options.li),
-            width = $li.width(),
+            width = (options.mode === "width") ? $li.width() : $li.height() ,
             now = 0,
             max = Math.ceil($li.length / options.i) - 1,
-            animate = function () {options.before(now); width = $li.width(); $ul.stop().animate({left: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); };
+            animate = function () {
+                    options.before(now);
+                    width = (options.mode === "width") ? $li.width() : $li.height();
+                    $ul.stop();
+                    if (options.mode === "width")
+                        $ul.animate({left: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); 
+                    else
+                        $ul.animate({top: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); 
+                };
         $box.on("click", options.last, function() {
                 animate(-- now < 0 ? now = max : "")
             })
