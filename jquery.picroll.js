@@ -2,14 +2,15 @@
  * jquery.picroll
  * 
  * $(".picroll").picroll({
- *     i: 5,                // √ø“≥œ‘ æ ˝¡ø
- *     ul: "ul",            // ul ‘™Àÿ
- *     li: "li",            // li ‘™Àÿ
- *     last: ".last",       // …œ“ª“≥∞¥≈•
- *     next: ".next",       // œ¬“ª“≥∞¥≈•
- *     speed: "slow"        // πˆ∂ØÀŸ∂»
- *     before: $.noop,      // πˆ∂Ø«∞÷¥––
- *     after: $.noop        // πˆ∂Ø∫Û÷¥––
+ *     ul: "ul",            // ul ÂÖÉÁ¥†
+ *     li: "li",            // li ÂÖÉÁ¥†
+ *     last: ".last",       // ‰∏ä‰∏ÄÈ°µÊåâÈíÆ
+ *     next: ".next",       // ‰∏ã‰∏ÄÈ°µÊåâÈíÆ
+ *     speed: "normal",     // ÊªöÂä®ÈÄüÂ∫¶
+ *     mode: "x",           // ÊªöÂä®Ê®°Âºè x/y
+ *     ready: $.noop,       // ËΩΩÂÖ•ÂêéÊâßË°å
+ *     before: $.noop,      // ÊªöÂä®ÂâçÊâßË°å
+ *     after: $.noop        // ÊªöÂä®ÂêéÊâßË°å
  * });
  * 
  * @link https://github.com/mingfunwong/jquery.picroll
@@ -18,13 +19,13 @@
  */
 $.fn.picroll = function(options) {
     var options = $.extend({
-            i: 5,
             ul: "ul",
             li: "li",
             last: ".last",
             next: ".next",
-            speed: "slow",
-            mode: "width",
+            speed: "normal",
+            mode: "x",
+            ready: $.noop,
             before: $.noop,
             after: $.noop
         }, options);
@@ -32,18 +33,27 @@ $.fn.picroll = function(options) {
         var $box = $(this),
             $ul = $box.find(options.ul),
             $li = $ul.find(options.li),
-            width = (options.mode === "width") ? $li.width() : $li.height() ,
+            width, height, number, max,
             now = 0,
-            max = Math.ceil($li.length / options.i) - 1,
             animate = function () {
-                    options.before(now);
-                    width = (options.mode === "width") ? $li.width() : $li.height();
-                    $ul.stop();
-                    if (options.mode === "width")
-                        $ul.animate({left: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); 
-                    else
-                        $ul.animate({top: now * width * options.i * -1}, options.speed, function(){ options.after(now) }); 
-                };
+                options.before($box, {now: now, width: width, height: height, max: max});
+                reset();
+                if (options.mode === "x")
+                    $ul.stop().animate({left: now * width * number * -1}, options.speed, function(){ options.after($box, {now: now, width: width, height: height, max: max}) });
+                else
+                    $ul.stop().animate({top: now * height * number * -1}, options.speed, function(){ options.after($box, {now: now, width: width, height: height, max: max}) });
+            },
+            reset = function () {
+                width = $li.width();
+                height = $li.height();
+                if (options.mode === "x")
+                    number = parseInt($box.width() / width) < 1 ? 1 : parseInt($box.width() / width);
+                else 
+                    number = parseInt($box.height() / height) < 1 ? 1 : parseInt($box.height() / height);
+                max = Math.ceil($li.length / number) - 1;
+            };
+        reset();
+        options.ready($box, {now: now, width: width, height: height, max: max});
         $box.on("click", options.last, function() {
                 animate(-- now < 0 ? now = max : "")
             })

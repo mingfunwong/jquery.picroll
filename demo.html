@@ -89,9 +89,8 @@
 <script>
 $(function($) {
     $('.picroll').picroll({
-        i: 5, // Show number
-        before: function (i){console.log(i)},
-        after: function (i){console.log(i)},
+        before: function (ele, i){console.log(i)},
+        after: function (ele, i){console.log(i)},
     });
 });
 </script>
